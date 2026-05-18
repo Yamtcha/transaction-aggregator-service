@@ -28,30 +28,30 @@ public class SpendingSummaryUpdater {
     @Transactional
     public void process(TransactionIngestedEvent event) {
 
-        Transaction tx = event.getTransaction();
+        Transaction transaction = event.getTransaction();
 
-        String sourceId = tx.getSourceId();
-        String period = YearMonth.from(tx.getTransactedAt().atZone(ZoneOffset.UTC)).toString();
+        String sourceId = transaction.getSourceId();
+        String period = YearMonth.from(transaction.getTransactedAt().atZone(ZoneOffset.UTC)).toString();
 
-        SpendingCategory category = categoryResolver.resolve(tx);
+        SpendingCategory category = categoryResolver.resolve(transaction);
 
         SpendingSummary summary = summaryRepository
                 .findBySourceIdAndPeriodAndCategoryAndCurrency(
                         sourceId,
                         period,
                         category,
-                        tx.getCurrency()
+                        transaction.getCurrency()
                 )
                 .orElseGet(() -> SpendingSummary.builder()
                         .sourceId(sourceId)
                         .period(period)
                         .category(category)
-                        .currency(tx.getCurrency())
+                        .currency(transaction.getCurrency())
                         .totalAmount(BigDecimal.ZERO)
                         .transactionCount(0L)
                         .build());
 
-        summary.setTotalAmount(summary.getTotalAmount().add(tx.getAmount()));
+        summary.setTotalAmount(summary.getTotalAmount().add(transaction.getAmount()));
         summary.setTransactionCount(summary.getTransactionCount() + 1);
         summary.setLastUpdatedAt(Instant.now());
 

@@ -39,8 +39,8 @@ public class CategoryResolver {
                 .toList();
     }
 
-    public SpendingCategory resolve(Transaction tx) {
-        String raw = Stream.of(tx.getMerchantName(), tx.getDescription())
+    public SpendingCategory resolve(Transaction transaction) {
+        String raw = Stream.of(transaction.getMerchantName(), transaction.getDescription())
                 .filter(Objects::nonNull)
                 .collect(Collectors.joining(" "));
 
