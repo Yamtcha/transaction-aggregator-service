@@ -13,7 +13,7 @@ import java.util.UUID;
         name = "spending_summary",
         uniqueConstraints = @UniqueConstraint(
                 name = "uq_spending_summary",
-                columnNames = {"period", "currency", "category"}
+                columnNames = {"sourceId", "period", "currency", "category"}
         )
 )
 @Getter

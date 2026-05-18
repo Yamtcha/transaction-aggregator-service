@@ -13,6 +13,5 @@ public enum SpendingCategory {
     TRANSFER,
     INVESTMENT,
     LOAN_PAYMENT,
-    OTHER,
-    UNKNOWN
+    OTHER
 }

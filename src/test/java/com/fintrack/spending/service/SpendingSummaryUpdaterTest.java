@@ -54,7 +54,6 @@ class SpendingSummaryUpdaterTest {
         event.setEventId(UUID.randomUUID());
         event.setBatchId(UUID.randomUUID().toString());
         event.setOccurredAt(transactedAt);
-        event.setTargetAggregators(List.of());
 
         return event;
     }

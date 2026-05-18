@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface SpendingSummaryRepository extends JpaRepository<SpendingSummary, Long> {
+public interface SpendingSummaryRepository extends JpaRepository<SpendingSummary, UUID> {
     Optional<SpendingSummary> findBySourceIdAndPeriodAndCategoryAndCurrency(
             String sourceId,
             String period,
