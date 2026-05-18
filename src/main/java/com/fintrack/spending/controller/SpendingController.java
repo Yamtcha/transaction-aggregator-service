@@ -1,7 +1,7 @@
 package com.fintrack.spending.controller;
 
 import com.fintrack.common.dto.ApiResponse;
-import com.fintrack.spending.dto.response.SpendingSummaryResponse;
+import com.fintrack.spending.model.SpendingSummaryResponse;
 import com.fintrack.spending.service.SpendingSummaryUpdater;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

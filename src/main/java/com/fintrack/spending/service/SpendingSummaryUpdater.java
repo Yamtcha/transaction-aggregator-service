@@ -5,17 +5,17 @@ import com.fintrack.common.model.Transaction;
 import com.fintrack.spending.domain.SpendingCategory;
 import com.fintrack.spending.domain.entity.SpendingSummary;
 import com.fintrack.spending.domain.repository.SpendingSummaryRepository;
-import com.fintrack.spending.dto.response.SpendingSummaryResponse;
+import com.fintrack.spending.model.SpendingSummaryResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.YearMonth;
 import java.time.ZoneOffset;
-import java.time.Instant;
 import java.util.List;
-import java.math.BigDecimal;
 
 @Slf4j
 @Service
@@ -52,9 +52,9 @@ public class SpendingSummaryUpdater {
                         .build());
 
         summary.setTotalAmount(summary.getTotalAmount().add(tx.getAmount()));
-
         summary.setTransactionCount(summary.getTransactionCount() + 1);
         summary.setLastUpdatedAt(Instant.now());
+
         summaryRepository.save(summary);
 
         log.debug("Updated summary sourceId={} period={} category={}", sourceId, period, category);

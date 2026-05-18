@@ -1,4 +1,4 @@
-package com.fintrack.spending.dto.response;
+package com.fintrack.spending.model;
 
 import com.fintrack.spending.domain.SpendingCategory;
 import com.fintrack.spending.domain.entity.SpendingSummary;
