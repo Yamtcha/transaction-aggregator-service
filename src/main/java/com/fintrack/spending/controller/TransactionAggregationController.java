@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/spending")
+@RequestMapping("/transaction")
 @RequiredArgsConstructor
-public class SpendingController {
+public class TransactionAggregationController {
 
     private final SpendingSummaryUpdater summaryUpdater;
 

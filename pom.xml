@@ -13,10 +13,10 @@
     </parent>
 
     <groupId>com.fintrack</groupId>
-    <artifactId>spending-aggregator-service</artifactId>
+    <artifactId>transaction-aggregator-service</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>spending-aggregator-service</name>
-    <description>Spending Aggregator Service - consumes spending transactions from AmazonMQ</description>
+    <name>transaction-aggregator-service</name>
+    <description>Transaction Aggregator Service - consumes transactions from AmazonMQ</description>
 
     <properties>
         <java.version>21</java.version>
