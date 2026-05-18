@@ -269,6 +269,60 @@ spending:
           - 'aquarium'
           - 'zoo'
 
+      - category: INVESTMENT
+        priority: 11
+        patterns:
+          - 'easy\\s*equities'
+          - 'etf\\s*sa'
+          - 'satrix'
+          - 'stanlib'
+          - 'coronation'
+          - 'allan\\s*gray'
+          - 'ninety\\s*one'
+          - 'sanlam\\s*(invest|unit|fund)'
+          - 'old\\s*mutual\\s*(invest|fund)'
+          - 'nedgroup\\s*invest'
+          - 'absa\\s*(invest|stockbroker)'
+          - 'fnb\\s*(shares|invest)'
+          - 'standard\\s*(bank\\s*)?(online\\s*)?share'
+          - 'investec\\s*(invest|stockbroker)'
+          - 'psg\\s*(invest|wealth)'
+          - 'etfsa'
+          - 'unit\\s*trust'
+          - 'retirement\\s*annuity'
+          - '\\bra\\s*contribution'
+          - 'tfsa'
+          - 'tax\\s*free\\s*(savings|invest)'
+          - 'preservation\\s*fund'
+          - 'stockbroker'
+          - 'brokerage'
+          - 'crypto\\s*(invest|buy|purchase)'
+          - 'luno'
+          - 'valr'
+          - 'binance'
+
+      - category: LOAN_PAYMENT
+        priority: 12
+        patterns:
+          - 'home\\s*loan'
+          - 'bond\\s*(repay|payment|install)?'
+          - 'mortgage'
+          - 'vehicle\\s*(finance|loan|payment|install)'
+          - 'car\\s*(loan|finance|payment|install)'
+          - 'auto\\s*(loan|finance)'
+          - 'mv\\s*finance'
+          - 'wesbank'
+          - 'nedbank\\s*(vehicle|vaf|home)'
+          - 'absa\\s*(vehicle|home\\s*loan|bond)'
+          - 'fnb\\s*(vehicle|home\\s*loan|bond)'
+          - 'standard\\s*bank\\s*(vehicle|home\\s*loan|bond)'
+          - 'sa\\s*home\\s*loans'
+          - 'betterlife'
+          - 'ooba'
+          - 'personal\\s*loan\\s*(repay|install|payment)'
+          - 'loan\\s*repay'
+          - 'loan\\s*install'
+
       - category: OTHER
         priority: 999
         patterns:

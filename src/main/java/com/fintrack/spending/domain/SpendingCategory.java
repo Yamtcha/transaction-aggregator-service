@@ -11,6 +11,8 @@ public enum SpendingCategory {
     HEALTHCARE,
     INCOME,
     TRANSFER,
+    INVESTMENT,
+    LOAN_PAYMENT,
     OTHER,
     UNKNOWN
 }
