@@ -30,3 +30,246 @@ spring:
 
 server:
   port: 8083
+
+spending:
+  categorization:
+    noise-prefix: '(?i)^(card\s*purchase|pos\s*purchase|pos|acb\s*(debit|credit)|debit\s*order|internet\s*(transfer|pmt)|naedo|early\s*decom|recurring\s*payment|so\s+|dd\s+|eft\s*(payment|debit)|faster\s*payment|bank\s*charge|service\s*fee|atm)[\s*:/-]*'
+    reference-noise: '[*#|]|\\d{6,}'
+    rules:
+      - category: INCOME
+        priority: 1
+        patterns:
+          - 'salary'
+          - 'payroll'
+          - 'wages?'
+          - 'remuneration'
+          - 'bonus'
+          - 'dividend'
+          - 'commission\\s*pay'
+          - 'pension'
+          - 'sassa'
+          - 'grant'
+          - 'refund'
+          - 'cashback'
+          - 'reimburs'
+          - 'credit\\s*reversal'
+          - 'interest\\s*earned'
+
+      - category: TRANSFER
+        priority: 2
+        patterns:
+          - 'eft'
+          - 'electronic\\s*transfer'
+          - 'instant\\s*payment'
+          - 'rtc'
+          - 'bank\\s*transfer'
+          - 'funds\\s*transfer'
+          - 'zapper'
+          - 'snapscan'
+          - 'instant\\s*money'
+          - 'moya'
+          - 'wallet'
+
+      - category: UTILITIES
+        priority: 3
+        patterns:
+          - 'eskom'
+          - 'city\\s*power'
+          - 'electricity'
+          - 'prepaid\\s*(meter|electric|power)'
+          - 'yaka'
+          - 'water\\s*(account|meter|levy)?'
+          - 'sewerage'
+          - 'rates\\s*(&|and)\\s*taxes'
+          - 'municipality'
+          - 'tshwane'
+          - 'ekurhuleni'
+          - 'city\\s*of\\s*(jhb|cape\\s*town|tshwane)'
+          - 'voda(com)?'
+          - 'mtn'
+          - 'telkom'
+          - 'cell\\s*c'
+          - 'rain'
+          - 'fibre'
+          - 'adsl'
+          - 'openserve'
+          - 'vumatel'
+          - 'frogfoot'
+          - 'metrofibre'
+          - 'evotel'
+          - 'airtime'
+          - 'data\\s*bundle'
+
+      - category: HEALTHCARE
+        priority: 4
+        patterns:
+          - 'dischem'
+          - 'clicks'
+          - 'netcare'
+          - 'mediclini?c'
+          - 'life\\s*hospital'
+          - 'intercare'
+          - 'dentist'
+          - 'dental'
+          - 'optometr'
+          - 'doctor'
+          - 'pharmac'
+          - 'hospital'
+          - 'clinic'
+          - 'medical\\s*(aid|centre)'
+          - 'prescription'
+          - 'vitamin'
+
+      - category: GROCERIES
+        priority: 5
+        patterns:
+          - 'checkers'
+          - 'shoprite'
+          - 'usave'
+          - 'pick\\s*n\\s*pay'
+          - 'pnp'
+          - 'woolworths(?!\\s*(home|beauty))'
+          - 'spar'
+          - 'makro'
+          - 'game\\s*store'
+          - 'box?er'
+          - 'freshstop'
+          - 'ok\\s*foods'
+          - 'ok\\s*grocer'
+          - '7-?eleven'
+          - 'fruit\\s*(&|and)\\s*veg'
+
+      - category: DINING
+        priority: 6
+        patterns:
+          - 'spur'
+          - 'mcdon(ald)?s?'
+          - 'kfc'
+          - 'steers'
+          - 'nandos?'
+          - 'wimpy'
+          - 'debonairs'
+          - 'pizza\\s*(hut|inn)?'
+          - 'burger\\s*king'
+          - 'fishaways'
+          - 'mugg\\s*(&|and)\\s*bean'
+          - 'vida\\s*e'
+          - 'starbucks'
+          - 'seattle\\s*coffee'
+          - 'restaurant'
+          - 'cafe'
+          - 'bistro'
+          - 'takeaway'
+          - 'sushi'
+          - 'steakhouse'
+
+      - category: TRANSPORT
+        priority: 7
+        patterns:
+          - 'uber'
+          - 'bolt'
+          - 'indriver'
+          - 'taxify'
+          - 'lyft'
+          - 'petrol'
+          - 'fuel'
+          - 'bp'
+          - 'shell'
+          - 'engen'
+          - 'sasol'
+          - 'caltex'
+          - 'parking'
+          - 'e-?toll'
+          - 'sanral'
+          - 'gautrain'
+          - 'metrobus'
+          - 'myciti'
+          - 'prasa'
+          - 'intercape'
+          - 'greyhound'
+          - 'translux'
+          - 'kulula'
+          - 'flysafair'
+          - 'airlink'
+          - 'avis'
+          - 'europcar'
+
+      - category: SUBSCRIPTIONS
+        priority: 8
+        patterns:
+          - 'netflix'
+          - 'spotify'
+          - 'apple\\.com'
+          - 'itunes'
+          - 'apple\\s*(tv|music|one)'
+          - 'icloud'
+          - 'google\\s*(play|one)'
+          - 'youtube\\s*premium'
+          - 'amazon\\s*(prime|video|music)'
+          - 'dstv'
+          - 'showmax'
+          - 'disney\\s*[+plus]'
+          - 'hbo\\s*(max)?'
+          - 'paramount\\+?'
+          - 'microsoft\\s*(365|office)'
+          - 'adobe'
+          - 'dropbox'
+          - 'notion'
+          - 'slack'
+          - 'playstation\\s*(plus|now)'
+          - 'xbox\\s*game\\s*pass'
+          - 'patreon'
+          - 'substack'
+
+      - category: SHOPPING
+        priority: 9
+        patterns:
+          - 'truworths'
+          - 'foshini'
+          - 'pep\\s*(stores)?'
+          - 'jet\\s*store'
+          - 'legit'
+          - 'shein'
+          - 'zara'
+          - 'h&?m'
+          - 'uniqlo'
+          - 'nike'
+          - 'adidas'
+          - 'puma'
+          - 'takealot'
+          - 'bidorbuy'
+          - 'mr\\s*price'
+          - 'mrp'
+          - 'hifi\\s*corp'
+          - 'dion\\s*wired'
+          - 'apple\\s*store'
+          - 'samsung\\s*store'
+          - 'yuppiechef'
+          - 'build\\s*it'
+          - 'online\\s*shop'
+
+      - category: ENTERTAINMENT
+        priority: 10
+        patterns:
+          - 'ster\\s*kin'
+          - 'nu\\s*metro'
+          - 'cinema'
+          - 'computicket'
+          - 'ticketmaster'
+          - 'eventbrite'
+          - 'ticketpro'
+          - 'virgin\\s*active'
+          - 'planet\\s*fitness'
+          - 'bowling'
+          - 'golf'
+          - 'laser\\s*quest'
+          - 'theatre'
+          - 'concert'
+          - 'museum'
+          - 'aquarium'
+          - 'zoo'
+
+      - category: OTHER
+        priority: 999
+        patterns:
+          - '.*'

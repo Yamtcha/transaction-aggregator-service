@@ -1,5 +1,6 @@
 package com.fintrack.spending.domain.entity;
 
+import com.fintrack.spending.domain.SpendingCategory;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
     name = "spending_summary",
     uniqueConstraints = @UniqueConstraint(
         name = "uq_spending_summary",
-        columnNames = {"source_id", "period", "currency", "merchant_name"}
+            columnNames = {"period", "currency", "category"}
     )
 )
 @Getter
@@ -21,34 +22,21 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class SpendingSummary {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", updatable = false, nullable = false)
+    @GeneratedValue
     private UUID id;
 
-    @Column(name = "source_id", nullable = false)
     private String sourceId;
-
-    @Column(name = "period", nullable = false)
     private String period;
 
-    @Column(name = "merchant_name", nullable = false)
-    @Builder.Default
-    private String merchantName = "UNKNOWN";
+    @Enumerated(EnumType.STRING)
+    private SpendingCategory category;
 
-    @Column(name = "currency", nullable = false)
     private String currency;
 
-    @Column(name = "total_amount", nullable = false)
-    @Builder.Default
-    private BigDecimal totalAmount = BigDecimal.ZERO;
+    private BigDecimal totalAmount;
 
-    @Column(name = "transaction_count", nullable = false)
-    @Builder.Default
-    private int transactionCount = 0;
+    private Long transactionCount;
 
-    @Column(name = "last_updated_at", nullable = false)
-    @Builder.Default
-    private Instant lastUpdatedAt = Instant.now();
+    private Instant lastUpdatedAt;
 }
