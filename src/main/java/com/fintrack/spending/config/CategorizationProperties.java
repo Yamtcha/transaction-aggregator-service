@@ -11,4 +11,5 @@ public record CategorizationProperties(
         String noisePrefix,
         String referenceNoise,
         Map<SpendingCategory, List<String>> rules
-) {}
+) {
+}

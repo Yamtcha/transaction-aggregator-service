@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     public static final String TRANSACTIONS_EXCHANGE = "fintrack.transactions";
-    public static final String DLX_EXCHANGE          = "fintrack.dlx";
+    public static final String DLX_EXCHANGE = "fintrack.dlx";
 
-    public static final String SPENDING_QUEUE    = "fintrack.spending";
+    public static final String SPENDING_QUEUE = "fintrack.spending";
     public static final String DEAD_LETTER_QUEUE = "fintrack.dead-letter";
 
     public static final String ROUTING_KEY_SPENDING = "transaction.SPENDING";

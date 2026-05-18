@@ -10,11 +10,11 @@ import java.util.UUID;
 
 @Entity
 @Table(
-    name = "spending_summary",
-    uniqueConstraints = @UniqueConstraint(
-        name = "uq_spending_summary",
-            columnNames = {"period", "currency", "category"}
-    )
+        name = "spending_summary",
+        uniqueConstraints = @UniqueConstraint(
+                name = "uq_spending_summary",
+                columnNames = {"period", "currency", "category"}
+        )
 )
 @Getter
 @Setter
