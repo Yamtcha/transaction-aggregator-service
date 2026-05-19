@@ -32,6 +32,10 @@ spring:
         acknowledge-mode: manual
         prefetch: 10
 
+rabbitmq:
+  queues:
+    transactions: fintrack.transactions
+
 server:
   port: 8083
 

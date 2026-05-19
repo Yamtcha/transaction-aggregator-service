@@ -6,6 +6,7 @@ import com.fintrack.spending.domain.SpendingCategory;
 import com.fintrack.spending.domain.entity.SpendingSummary;
 import com.fintrack.spending.domain.repository.SpendingSummaryRepository;
 import com.fintrack.spending.model.SpendingSummaryResponse;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class SpendingSummaryUpdater {
 
     private final SpendingSummaryRepository summaryRepository;
     private final CategoryResolver categoryResolver;
+    private final MeterRegistry meterRegistry;
 
     @Transactional
     public void process(TransactionIngestedEvent event) {
@@ -57,6 +59,7 @@ public class SpendingSummaryUpdater {
 
         summaryRepository.save(summary);
 
+        meterRegistry.counter("transactions.categorized", "category", category.name()).increment();
         log.debug("Updated summary sourceId={} period={} category={}", sourceId, period, category);
     }
 

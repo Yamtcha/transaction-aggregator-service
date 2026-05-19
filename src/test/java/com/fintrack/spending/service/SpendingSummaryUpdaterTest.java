@@ -6,6 +6,9 @@ import com.fintrack.spending.domain.SpendingCategory;
 import com.fintrack.spending.domain.entity.SpendingSummary;
 import com.fintrack.spending.domain.repository.SpendingSummaryRepository;
 import com.fintrack.spending.model.SpendingSummaryResponse;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -34,8 +37,19 @@ class SpendingSummaryUpdaterTest {
     @Mock
     private CategoryResolver categoryResolver;
 
+    @Mock
+    private MeterRegistry meterRegistry;
+
+    @Mock
+    private Counter counter;
+
     @InjectMocks
     private SpendingSummaryUpdater updater;
+
+    @BeforeEach
+    void setUp() {
+        lenient().when(meterRegistry.counter(any(String.class), any(String[].class))).thenReturn(counter);
+    }
 
     private TransactionIngestedEvent transactionIngestedEvent(String sourceId, Instant transactedAt,
                                                String currency, BigDecimal amount,

@@ -1,9 +1,10 @@
 package com.fintrack.spending.consumer;
 
 import com.fintrack.common.events.TransactionIngestedEvent;
-import com.fintrack.spending.config.RabbitMQConfig;
 import com.fintrack.spending.service.SpendingSummaryUpdater;
 import com.rabbitmq.client.Channel;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -19,20 +20,24 @@ import java.io.IOException;
 public class SpendingTransactionConsumer {
 
     private final SpendingSummaryUpdater summaryUpdater;
+    private final MeterRegistry meterRegistry;
 
-    @RabbitListener(queues = RabbitMQConfig.SPENDING_QUEUE, ackMode = "MANUAL", concurrency = "4-10")
+    @RabbitListener(queues = "${rabbitmq.queues.transactions}", ackMode = "MANUAL", concurrency = "4-10")
     public void consume(TransactionIngestedEvent event,
                         Channel channel,
                         @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag) throws IOException {
+        Timer.Sample sample = Timer.start(meterRegistry);
         try {
             log.debug("Received spending event eventId={} externalId={}",
                     event.getEventId(), event.getTransaction().getExternalId());
             summaryUpdater.process(event);
             channel.basicAck(deliveryTag, false);
+            sample.stop(meterRegistry.timer("transactions.consumed", "status", "success"));
         } catch (Exception ex) {
             log.error("Failed to process spending event eventId={}: {}",
                     event.getEventId(), ex.getMessage(), ex);
             channel.basicNack(deliveryTag, false, false);
+            sample.stop(meterRegistry.timer("transactions.consumed", "status", "failure"));
         }
     }
 }
