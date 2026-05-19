@@ -31,6 +31,9 @@ spring:
 server:
   port: 8083
 
+api:
+  key: ${API_KEY}
+
 spending:
   categorization:
     noise-prefix: '(?i)^(card\s*purchase|pos\s*purchase|pos|acb\s*(debit|credit)|debit\s*order|internet\s*(transfer|pmt)|naedo|early\s*decom|recurring\s*payment|so\s+|dd\s+|eft\s*(payment|debit)|faster\s*payment|bank\s*charge|service\s*fee|atm)[\s*:/-]*'
