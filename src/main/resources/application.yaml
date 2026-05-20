@@ -32,6 +32,11 @@ rabbitmq:
   queues:
     transactions: fintrack.transactions
 
+fintrack:
+  rabbitmq:
+    exchange: fintrack.transactions
+    routing-key: "transaction.TRANSACTION"
+
 server:
   port: 8083
 
