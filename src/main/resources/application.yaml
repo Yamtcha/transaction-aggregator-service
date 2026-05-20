@@ -5,9 +5,9 @@ spring:
     virtual:
       enabled: true
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${AGGREGATOR_DB_URL}
+    username: ${AGGREGATOR_DB_USERNAME}
+    password: ${AGGREGATOR_DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: validate
@@ -34,12 +34,6 @@ rabbitmq:
 
 server:
   port: 8083
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, metrics, prometheus
 
 api:
   key: ${API_KEY}
