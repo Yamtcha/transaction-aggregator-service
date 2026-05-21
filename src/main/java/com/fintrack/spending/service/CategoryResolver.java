@@ -5,6 +5,7 @@ import com.fintrack.spending.config.CategorizationProperties;
 import com.fintrack.spending.domain.SpendingCategory;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class CategoryResolver {
@@ -48,9 +50,11 @@ public class CategoryResolver {
 
         for (CategoryRule rule : rules) {
             if (rule.matches(normalized)) {
+                log.error("Resolved category={} for input=\"{}\"", rule.category(), normalized);
                 return rule.category();
             }
         }
+        log.error("No category matched for input=\"{}\", defaulting to OTHER", normalized);
         return SpendingCategory.OTHER;
     }
 

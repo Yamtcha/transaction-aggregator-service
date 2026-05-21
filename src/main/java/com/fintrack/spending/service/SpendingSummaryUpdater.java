@@ -60,7 +60,8 @@ public class SpendingSummaryUpdater {
         summaryRepository.save(summary);
 
         meterRegistry.counter("transactions.categorized", "category", category.name()).increment();
-        log.debug("Updated summary sourceId={} period={} category={}", sourceId, period, category);
+        log.error("Updated summary sourceId={} period={} category={} totalAmount={} count={}",
+                sourceId, period, category, summary.getTotalAmount(), summary.getTransactionCount());
     }
 
     @Transactional(readOnly = true)

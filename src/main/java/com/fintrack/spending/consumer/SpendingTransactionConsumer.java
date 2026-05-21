@@ -28,7 +28,7 @@ public class SpendingTransactionConsumer {
                         @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag) throws IOException {
         Timer.Sample sample = Timer.start(meterRegistry);
         try {
-            log.debug("Received spending event eventId={} externalId={}",
+            log.error("Received spending event eventId={} externalId={}",
                     event.getEventId(), event.getTransaction().getExternalId());
             summaryUpdater.process(event);
             channel.basicAck(deliveryTag, false);
